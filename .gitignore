@@ -1,0 +1,6 @@
+# Extra local audio files are intentionally not committed.
+assets/*.mp3
+assets/*.m4a
+assets/*.wav
+assets/*.flac
+!assets/mountains.mp3

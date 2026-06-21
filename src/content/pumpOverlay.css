@@ -1,0 +1,343 @@
+:host {
+  all: initial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.pump-size {
+  --pump-pop-scale: 1.04;
+  --pump-duration: 280ms;
+  --pump-intensity: 0;
+  --pump-tilt-negative: 0deg;
+  --pump-tilt-positive: 0deg;
+  --pump-font-size: 25px;
+  --pump-card-padding: 12px;
+  --pump-content-gap: 10px;
+  --pump-content-width: 200px;
+  --pump-message-font-size: 12px;
+  --pump-secondary-font-size: 12px;
+  --pump-close-font-size: 12px;
+  --pump-close-width: 148px;
+  --pump-button-size: 28px;
+  --pump-progress-height: 18px;
+  --pump-body-offset: 0px;
+  --pump-bubble-diameter: 286px;
+  --pump-stack-width: 200px;
+  --pump-shadow: 0 18px 36px rgba(28, 17, 50, 0.24);
+  --pump-foreground: #211a32;
+  --pump-muted: #6c617b;
+  --pump-message-color: #3a304e;
+  --pump-button-background: rgba(255, 255, 255, 0.8);
+  --pump-button-background-hover: #ffffff;
+  --pump-button-color: #4b3f60;
+  --pump-button-color-hover: #211a32;
+  --pump-button-border: rgba(33, 26, 50, 0.12);
+  --pump-progress-background: rgba(33, 26, 50, 0.09);
+  --pump-progress-border: rgba(33, 26, 50, 0.12);
+  --pump-progress-gradient: linear-gradient(90deg, #13c2b3, #ffe45e 45%, #ff4fa3 100%);
+  --pump-progress-background-size: 100% 100%;
+  --pump-progress-background-position: center;
+  --pump-readable-panel-background: transparent;
+  --pump-readable-panel-border: transparent;
+  --pump-readable-shadow: none;
+  width: 100%;
+  height: 100%;
+  font-family: Inter, ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+  pointer-events: none;
+  transform-origin: bottom right;
+}
+
+.pump-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pump-content-gap);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border: 2px solid rgba(33, 26, 50, 0.18);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff9c9 0%, #ffffff 46%, #e8fff9 100%);
+  box-shadow: var(--pump-shadow);
+  color: var(--pump-foreground);
+  padding: var(--pump-card-padding);
+  pointer-events: auto;
+  text-align: center;
+  transform: translateZ(0);
+  transition:
+    gap 320ms ease,
+    padding 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.pump-card.has-background-gif {
+  background-image: var(--pump-background-gif);
+  background-position: center;
+  background-size: cover;
+}
+
+.pump-card.has-background-gif::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.14) 44%, rgba(33, 26, 50, 0.28) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.pump-card.has-background-gif.gif-tone-light {
+  --pump-foreground: #171121;
+  --pump-muted: #473d57;
+  --pump-message-color: #171121;
+  --pump-button-background: rgba(255, 255, 255, 0.82);
+  --pump-button-background-hover: rgba(255, 255, 255, 0.96);
+  --pump-button-color: #171121;
+  --pump-button-color-hover: #171121;
+  --pump-button-border: rgba(23, 17, 33, 0.18);
+  --pump-progress-background: rgba(255, 255, 255, 0.5);
+  --pump-progress-border: rgba(23, 17, 33, 0.18);
+  --pump-readable-panel-background: rgba(255, 255, 255, 0.76);
+  --pump-readable-panel-border: rgba(23, 17, 33, 0.16);
+  --pump-readable-shadow: 0 2px 8px rgba(255, 255, 255, 0.48);
+}
+
+.pump-card.has-background-gif.gif-tone-light::before {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.08) 48%, rgba(255, 255, 255, 0.2) 100%);
+}
+
+.pump-card.has-background-gif.gif-tone-dark,
+.pump-card.has-background-gif.gif-tone-unknown {
+  --pump-foreground: #ffffff;
+  --pump-muted: rgba(255, 255, 255, 0.88);
+  --pump-message-color: #ffffff;
+  --pump-button-background: rgba(10, 9, 14, 0.68);
+  --pump-button-background-hover: rgba(10, 9, 14, 0.82);
+  --pump-button-color: #ffffff;
+  --pump-button-color-hover: #ffffff;
+  --pump-button-border: rgba(255, 255, 255, 0.26);
+  --pump-progress-background: rgba(0, 0, 0, 0.34);
+  --pump-progress-border: rgba(255, 255, 255, 0.24);
+  --pump-readable-panel-background: rgba(8, 7, 12, 0.58);
+  --pump-readable-panel-border: rgba(255, 255, 255, 0.18);
+  --pump-readable-shadow: 0 2px 10px rgba(0, 0, 0, 0.72);
+}
+
+.pump-card.has-background-gif.gif-tone-dark::before,
+.pump-card.has-background-gif.gif-tone-unknown::before {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.46) 50%, rgba(0, 0, 0, 0.58) 100%);
+}
+
+.pump-card.is-pumping {
+  animation: pump-pop var(--pump-duration) cubic-bezier(0.18, 0.9, 0.28, 1.2) both;
+}
+
+.pump-stack,
+.pump-actions {
+  display: flex;
+  align-items: center;
+}
+
+.pump-stack {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--pump-content-gap);
+  z-index: 1;
+  width: min(var(--pump-stack-width), var(--pump-content-width), calc(100vw - 28px));
+  max-width: calc(var(--pump-bubble-diameter) * 0.74);
+  max-height: calc(var(--pump-bubble-diameter) * 0.74);
+  min-height: 0;
+}
+
+.pump-actions {
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+  width: min(var(--pump-close-width), 100%);
+}
+
+.pump-close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--pump-button-size);
+  padding: 6px 14px;
+  border: 1px solid var(--pump-button-border);
+  border-radius: 999px;
+  background: var(--pump-button-background);
+  color: var(--pump-button-color);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: min(var(--pump-close-font-size), 18px);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.1;
+  outline: none;
+  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: nowrap;
+  transition: background 150ms ease, transform 150ms ease, color 150ms ease;
+}
+
+.pump-close-button:hover {
+  background: var(--pump-button-background-hover);
+  color: var(--pump-button-color-hover);
+  transform: translateY(-1px);
+}
+
+.pump-close-button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255, 79, 163, 0.18);
+}
+
+.pump-time {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--pump-body-offset);
+  gap: 6px;
+  color: var(--pump-foreground);
+  line-height: 1;
+  transition: margin-top 320ms ease;
+}
+
+.pump-elapsed {
+  font-size: var(--pump-font-size);
+  font-weight: 950;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.pump-limit,
+.pump-divider {
+  color: var(--pump-muted);
+  font-size: var(--pump-secondary-font-size);
+  font-weight: 850;
+}
+
+.pump-progress {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: var(--pump-progress-height);
+  overflow: hidden;
+  border: 1px solid var(--pump-progress-border);
+  border-radius: 999px;
+  background: var(--pump-progress-background);
+}
+
+.pump-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pump-progress-gradient);
+  background-position: var(--pump-progress-background-position);
+  background-size: var(--pump-progress-background-size);
+  transition: width 230ms ease;
+}
+
+.pump-progress-percent {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #ffffff;
+  font-size: max(10px, calc(var(--pump-progress-height) * 0.56));
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.92),
+    0 0 1px rgba(0, 0, 0, 0.92);
+  white-space: nowrap;
+}
+
+.pump-message {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  color: var(--pump-message-color);
+  font-size: var(--pump-message-font-size);
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.pump-card.has-background-gif .pump-close-button,
+.pump-card.has-background-gif .pump-time,
+.pump-card.has-background-gif .pump-message {
+  box-shadow: var(--pump-readable-shadow);
+  text-shadow: var(--pump-readable-shadow);
+}
+
+.pump-card.has-background-gif .pump-time,
+.pump-card.has-background-gif .pump-message {
+  padding: max(4px, calc(var(--pump-card-padding) * 0.4)) max(7px, calc(var(--pump-card-padding) * 0.65));
+  border: 1px solid var(--pump-readable-panel-border);
+  background: var(--pump-readable-panel-background);
+  backdrop-filter: blur(7px) saturate(1.18);
+}
+
+.pump-card.has-background-gif .pump-time {
+  border-radius: 999px;
+}
+
+.pump-card.has-background-gif .pump-message {
+  border-radius: 14px;
+}
+
+@keyframes pump-pop {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  34% {
+    transform: scale(var(--pump-pop-scale)) rotate(var(--pump-tilt-negative));
+  }
+
+  58% {
+    transform: scale(0.985) rotate(var(--pump-tilt-positive));
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes pump-glow {
+  0%,
+  100% {
+    filter: saturate(1);
+  }
+
+  45% {
+    filter: saturate(1.22) brightness(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pump-size,
+  .pump-progress-fill,
+  .pump-close-button {
+    transition-duration: 0.001ms !important;
+  }
+
+  .pump-card.is-pumping {
+    animation: pump-glow 220ms linear both;
+  }
+}
